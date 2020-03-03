@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/v1/task")
+@CrossOrigin(origins = "*")
 @RestController
 public class TaskController {
     private DbService service;
