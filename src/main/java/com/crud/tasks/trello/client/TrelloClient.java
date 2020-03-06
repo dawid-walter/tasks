@@ -8,9 +8,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class TrelloClient {
@@ -36,14 +35,13 @@ public class TrelloClient {
     public List<TrelloBoardDto> getTrelloBoards() {
         URI url = getUrl();
 
-        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
+        Optional<TrelloBoardDto[]> boardsResponse = Optional.ofNullable(restTemplate.getForObject(url, TrelloBoardDto[].class));
+        return Arrays.asList(boardsResponse.orElse(new TrelloBoardDto[0]));
 
-        boolean isNotEmpty = Arrays.stream(boardsResponse).findAny().isPresent();
-
-        if (isNotEmpty) {
+        /*if (isNotEmpty) {
             return Arrays.asList(boardsResponse);
         }
-        return new ArrayList<>();
+        return new ArrayList<>();*/
     }
 
     private URI getUrl() {
