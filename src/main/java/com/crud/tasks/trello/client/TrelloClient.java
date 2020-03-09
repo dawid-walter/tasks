@@ -1,8 +1,6 @@
 package com.crud.tasks.trello.client;
 
-import com.crud.tasks.domain.CreatedTrelloCard;
-import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.domain.TrelloCardDto;
+import com.crud.tasks.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -48,18 +46,23 @@ public class TrelloClient {
                 .queryParam("lists", "all").build().encode().toUri();
     }
 
-    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
-        URI url = createTrelloCardUrl(trelloCardDto);
+    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto, double amount) {
+        URI url = createTrelloCardUrl(trelloCardDto, amount);
         return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
     }
 
-    private URI createTrelloCardUrl(TrelloCardDto trelloCardDto) {
+    private URI createTrelloCardUrl(TrelloCardDto trelloCardDto, double amount) {
         return UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/cards/")
                 .queryParam("key", trelloAppKey)
                 .queryParam("token", trelloAppToken)
                 .queryParam("name", trelloCardDto.getName())
-                .queryParam("desc", trelloCardDto.getDescription())
+                .queryParam("desc", "Amount in GBP = " + (amount * Double.parseDouble(getRate().getMid())))
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getIdList()).build().encode().toUri();
+    }
+
+    public Rate getRate() {
+        CurrencyNBP currencyBoard = restTemplate.getForObject("http://api.nbp.pl/api/exchangerates/rates/a/gbp/?format=json", CurrencyNBP.class);
+        return currencyBoard.getRates().get(0);
     }
 }

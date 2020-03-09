@@ -1,6 +1,7 @@
 package com.crud.tasks.controller;
 
 import com.crud.tasks.domain.CreatedTrelloCard;
+import com.crud.tasks.domain.Rate;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.trello.client.TrelloClient;
@@ -38,6 +39,12 @@ public class TrelloController {
         });
     }
 
+    @GetMapping(value = "getRatesList")
+    public void getGbpCurrency() {
+        Rate rate = trelloClient.getRate();
+        System.out.println(rate.getMid());
+    }
+
     @GetMapping(value = "getTrelloBoardsContainsIdAndName")
     public void getTrelloBoardsContainsIdAndName() {
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
@@ -45,7 +52,7 @@ public class TrelloController {
     }
 
     @PostMapping(value = "createTrelloCard")
-    public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
-        return trelloClient.createNewCard(trelloCardDto);
+    public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto, @RequestParam double amount) {
+        return trelloClient.createNewCard(trelloCardDto, amount);
     }
 }
