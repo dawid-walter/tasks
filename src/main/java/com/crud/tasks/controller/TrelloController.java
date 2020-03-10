@@ -22,24 +22,11 @@ public class TrelloController {
     }
 
     @GetMapping(value = "getTrelloBoards")
-    public void getTrelloBoards() {
-
-        // GET request
-        List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
-
-        trelloBoards.forEach(trelloBoardDto -> {
-
-            System.out.println(trelloBoardDto.getName() + " - " + trelloBoardDto.getId());
-
-            System.out.println("This board contains lists: ");
-
-            trelloBoardDto.getLists().forEach(trelloList ->
-                    System.out.println(trelloList.getName() + " - " + trelloList.getId() + " - " + trelloList.isClosed()));
-
-        });
+    public List<TrelloBoardDto> getTrelloBoards() {
+        return trelloClient.getTrelloBoards();
     }
 
-    @GetMapping(value = "getRatesList")
+    @GetMapping(value = "getGbpCurrency")
     public void getGbpCurrency() {
         Rate rate = trelloClient.getRate();
         System.out.println(rate.getMid());
@@ -52,7 +39,7 @@ public class TrelloController {
     }
 
     @PostMapping(value = "createTrelloCard")
-    public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto, @RequestParam double amount) {
-        return trelloClient.createNewCard(trelloCardDto, amount);
+    public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+        return trelloClient.createNewCard(trelloCardDto);
     }
 }
