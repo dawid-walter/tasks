@@ -9,6 +9,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SimpleEmailService {
     private JavaMailSender javaMailSender;
@@ -32,6 +34,9 @@ public class SimpleEmailService {
     private SimpleMailMessage createSimpleMessage(Mail mail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
+        if (mail.getToCc() != null && !mail.getToCc().isEmpty()) {
+            mailMessage.setCc(mail.getToCc());
+        }
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
         return mailMessage;
