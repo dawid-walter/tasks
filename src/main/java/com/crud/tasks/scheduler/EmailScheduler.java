@@ -33,7 +33,7 @@ public class EmailScheduler {
     public void sendInformationEmail() {
         long size = taskRepository.count();
         String taskWord = "tasks";
-        if (taskRepository.findAll().size() == 1) {
+        if (size == 1) {
             taskWord = "task";
         }
         simpleEmailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT, "Currently in database you got " + size + " " + taskWord));
