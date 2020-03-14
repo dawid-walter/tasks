@@ -2,8 +2,7 @@ package com.crud.tasks.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.Optional;
+import org.apache.commons.lang3.StringUtils;
 
 @AllArgsConstructor
 @Getter
