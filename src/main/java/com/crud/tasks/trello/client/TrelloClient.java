@@ -67,4 +67,6 @@ public class TrelloClient {
         CurrencyNBP currencyBoard = restTemplate.getForObject("http://api.nbp.pl/api/exchangerates/rates/a/gbp/?format=json", CurrencyNBP.class);
         return currencyBoard.getRates().get(0);
     }
+
+
 }

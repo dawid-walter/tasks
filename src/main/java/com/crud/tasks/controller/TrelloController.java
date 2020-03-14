@@ -4,6 +4,7 @@ import com.crud.tasks.domain.CreatedTrelloCard;
 import com.crud.tasks.domain.Rate;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
+import com.crud.tasks.service.TrelloService;
 import com.crud.tasks.trello.client.TrelloClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,12 @@ import java.util.List;
 public class TrelloController {
 
     private TrelloClient trelloClient;
+    private TrelloService trelloService;
+
+    @Autowired
+    public void setTrelloService(TrelloService trelloService) {
+        this.trelloService = trelloService;
+    }
 
     @Autowired
     public void setTrelloClient(TrelloClient trelloClient) {
@@ -24,7 +31,12 @@ public class TrelloController {
 
     @GetMapping(value = "getTrelloBoards")
     public List<TrelloBoardDto> getTrelloBoards() {
-        return trelloClient.getTrelloBoards();
+        return trelloService.fetchTrelloBoards();
+    }
+
+    @PostMapping(value = "createTrelloCard")
+    public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+        return trelloService.createdTrelloCard(trelloCardDto);
     }
 
     @GetMapping(value = "getGbpCurrency")
@@ -37,10 +49,5 @@ public class TrelloController {
     public void getTrelloBoardsContainsIdAndName() {
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
         trelloBoards.stream().filter(e -> e.getName() != null && e.getId() != null && e.getName().contains("Kodilla")).forEach(e -> System.out.println(e.getId() + " " + e.getName()));
-    }
-
-    @PostMapping(value = "createTrelloCard")
-    public CreatedTrelloCard createdTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
-        return trelloClient.createNewCard(trelloCardDto);
     }
 }
