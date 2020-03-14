@@ -31,11 +31,10 @@ public class EmailScheduler {
 
     @Scheduled(cron = "0 0 10 * * *")
     public void sendInformationEmail() {
-        long size = taskRepository.count();
         String taskWord = "tasks";
-        if (size == 1) {
+        if (taskRepository.count() == 1) {
             taskWord = "task";
         }
-        simpleEmailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT, "Currently in database you got " + size + " " + taskWord));
+        simpleEmailService.send(new Mail(adminConfig.getAdminMail(), SUBJECT, "Currently in database you got " + taskRepository.count() + " " + taskWord));
     }
 }
