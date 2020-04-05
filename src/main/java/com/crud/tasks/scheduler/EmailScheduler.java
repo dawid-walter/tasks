@@ -6,7 +6,9 @@ import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.service.SimpleEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmailScheduler {
     private SimpleEmailService simpleEmailService;
     private TaskRepository taskRepository;
