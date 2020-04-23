@@ -48,9 +48,9 @@ public class TrelloClient {
                 .queryParam("lists", "all").build().encode().toUri();
     }
 
-    public CreatedTrelloCard createNewCard(TrelloCardDto trelloCardDto) {
+    public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto) {
         URI url = createTrelloCardUrl(trelloCardDto);
-        return restTemplate.postForObject(url, null, CreatedTrelloCard.class);
+        return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
     }
 
     private URI createTrelloCardUrl(TrelloCardDto trelloCardDto) {
@@ -62,11 +62,4 @@ public class TrelloClient {
                 .queryParam("pos", trelloCardDto.getPos())
                 .queryParam("idList", trelloCardDto.getIdList()).build().encode().toUri();
     }
-
-    public Rate getRate() {
-        CurrencyNBP currencyBoard = restTemplate.getForObject("http://api.nbp.pl/api/exchangerates/rates/a/gbp/?format=json", CurrencyNBP.class);
-        return currencyBoard.getRates().get(0);
-    }
-
-
 }
