@@ -20,12 +20,8 @@ public class TrelloClient {
     private TrelloConfig trelloConfig;
 
     @Autowired
-    public void setRestTemplate(RestTemplate restTemplate) {
+    public TrelloClient(RestTemplate restTemplate, TrelloConfig trelloConfig) {
         this.restTemplate = restTemplate;
-    }
-
-    @Autowired
-    public void setTrelloConfig(TrelloConfig trelloConfig) {
         this.trelloConfig = trelloConfig;
     }
 

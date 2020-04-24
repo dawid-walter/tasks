@@ -17,17 +17,9 @@ public class EmailScheduler {
 
 
     @Autowired
-    public void setSimpleEmailService(SimpleEmailService simpleEmailService) {
+    public EmailScheduler(SimpleEmailService simpleEmailService, TaskRepository taskRepository, AdminConfig adminConfig) {
         this.simpleEmailService = simpleEmailService;
-    }
-
-    @Autowired
-    public void setTaskRepository(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
-    }
-
-    @Autowired
-    public void setAdminConfig(AdminConfig adminConfig) {
         this.adminConfig = adminConfig;
     }
 
