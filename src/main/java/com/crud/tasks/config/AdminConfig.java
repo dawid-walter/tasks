@@ -7,6 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Getter
 public class AdminConfig {
-    @Value("${admin.mail]")
+    @Value("${admin.mail}")
     private String adminMail;
 }
