@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class TrelloClientTest {
+public class  TrelloClientTest {
     @InjectMocks
     private TrelloClient trelloClient;
 
