@@ -16,12 +16,12 @@ import java.util.List;
 public class TrelloController {
 
     private TrelloFacade trelloFacade;
-    private TrelloClient trelloClient;
+    //private TrelloClient trelloClient;
 
     @Autowired
-    public TrelloController(TrelloFacade trelloFacade, TrelloClient trelloClient) {
+    public TrelloController(TrelloFacade trelloFacade/*, TrelloClient trelloClient*/) {
         this.trelloFacade = trelloFacade;
-        this.trelloClient = trelloClient;
+        //this.trelloClient = trelloClient;
     }
 
     @GetMapping(value = "getTrelloBoards")
@@ -34,9 +34,9 @@ public class TrelloController {
         return trelloFacade.createCard(trelloCardDto);
     }
 
-    @GetMapping(value = "getTrelloBoardsContainsIdAndName")
+    /*@GetMapping(value = "getTrelloBoardsContainsIdAndName")
     public void getTrelloBoardsContainsIdAndName() {
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
         trelloBoards.stream().filter(e -> e.getName() != null && e.getId() != null && e.getName().contains("Kodilla")).forEach(e -> System.out.println(e.getId() + " " + e.getName()));
-    }
+    }*/
 }

@@ -21,18 +21,10 @@ public class TrelloService {
     private AdminConfig adminConfig;
 
     @Autowired
-    public void setAdminConfig(AdminConfig adminConfig) {
-        this.adminConfig = adminConfig;
-    }
-
-    @Autowired
-    public void setTrelloClient(TrelloClient trelloClient) {
+    public TrelloService(TrelloClient trelloClient, SimpleEmailService simpleEmailService, AdminConfig adminConfig) {
         this.trelloClient = trelloClient;
-    }
-
-    @Autowired
-    public void setSimpleEmailService(SimpleEmailService simpleEmailService) {
         this.simpleEmailService = simpleEmailService;
+        this.adminConfig = adminConfig;
     }
 
     public List<TrelloBoardDto> fetchTrelloBoards() {
