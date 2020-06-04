@@ -82,7 +82,7 @@ public class TrelloControllerTest {
         String jsonContent = gson.toJson(trelloCardDto);
 
         //When&Then
-        mockMvc.perform(post("/v1/trello/createTrelloBoards").contentType(MediaType.APPLICATION_JSON).characterEncoding("UTF-8").content(jsonContent))
+        mockMvc.perform(post("/v1/trello/createTrelloCard").contentType(MediaType.APPLICATION_JSON).characterEncoding("UTF-8").content(jsonContent))
                 .andExpect(jsonPath("$.id", is("323")))
                 .andExpect(jsonPath("$.name", is("Test")))
                 .andExpect(jsonPath("$.shortUrl", is("http://test.com")));
