@@ -7,7 +7,10 @@
 </head>
 <body>
 <h1>First impresion of my page</h1>
-<p th:text="${value}">tratatatbzbc</p>
+<p th:text="${value}"></p>
 <span th:text="${one} + ${two}"></span>
+<p>2*2= <span th:text="${two} * ${two}"></span></p>
+<p>2*2+2= <span th:text="${two} * ${two} + ${two}"></span></p>
+<p>2-2*2= <span th:text="${two} - ${two} * ${two}"></span></p>
 </body>
 </html>
