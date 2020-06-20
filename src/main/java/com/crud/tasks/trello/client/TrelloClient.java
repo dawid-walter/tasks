@@ -53,6 +53,7 @@ public class TrelloClient {
 
     public CreatedTrelloCardDto createNewCard(TrelloCardDto trelloCardDto) {
         URI url = createTrelloCardUrl(trelloCardDto);
+
         return restTemplate.postForObject(url, null, CreatedTrelloCardDto.class);
     }
 
