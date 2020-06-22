@@ -145,10 +145,16 @@
                                             </tbody>
                                         </table>
                                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
-                                            Application functionality:
+                                            Stats for <span th:text="${date.now()}"></span>
                                         </p>
-                                        <ul th:each="function : ${application_functionality}">
-                                            <li th:text="${function}"></li>
+                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                            There are <span th:text="${tasks.getAllTasks().size()}"></span> tasks in database.
+                                        </p>
+                                        <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;">
+                                            Tasks in database:
+                                        </p>
+                                        <ul th:each="task : ${tasks.getAllTasks()}">
+                                            <li th:text="${task}"></li>
                                         </ul>
                                         <p style="font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0; Margin-bottom: 15px;" th:text="${goodBye}">
                                         </p>
@@ -168,9 +174,9 @@
                         <tr>
                             <td class="content-block"
                                 style="font-family: sans-serif; vertical-align: top; padding-bottom: 10px; padding-top: 10px; font-size: 12px; color: #999999; text-align: center;">
-                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;" th:text="${companyName}"></span>
-                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;" th:text="${companyAddress}"></span>
-                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;" th:text="${copyright}"></span>
+                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;" th:text="${admin.getCompanyName()}"></span>
+                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;" th:text="${admin.getCompanyAddress()}"></span>
+                                <span class="apple-link" style="color: #999999; font-size: 12px; text-align: center;" th:text="${admin.getCopyright()}"></span>
                             </td>
                         </tr>
                     </table>
