@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +16,16 @@ public class MailCreatorService {
     @Qualifier("templateEngine")
     private TemplateEngine templateEngine;
     private AdminConfig adminConfig;
+    private DbService dbService;
+    private LocalDate date;
+
     private final List<String> functionality;
 
     @Autowired
-    public MailCreatorService(TemplateEngine templateEngine, AdminConfig adminConfig) {
+    public MailCreatorService(TemplateEngine templateEngine, AdminConfig adminConfig, DbService dbService) {
         this.templateEngine = templateEngine;
         this.adminConfig = adminConfig;
+        this.dbService = dbService;
 
         functionality = new ArrayList<>();
         functionality.add("Function 1");
@@ -41,6 +46,9 @@ public class MailCreatorService {
         context.setVariable("show_button", false);
         context.setVariable("is_friend", true);
         context.setVariable("application_functionality", functionality);
+        context.setVariable("tasks", dbService);
+        context.setVariable("date", date);
+
         return templateEngine.process("mail/creted-trello-card-mail", context);
     }
 }
